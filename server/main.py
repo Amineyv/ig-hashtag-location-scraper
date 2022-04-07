@@ -108,10 +108,11 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
 @app.get("/")
 def index():
     content = {
-        "Login": "/login",
-        "Logout": "/logout",
-        "Hashtag": "/hashtag/{tag}",
-        "Location": "/location",
+        "Login (POST, form_data=(username,password))": "/token",
+        "Hashtag [AUTHENTICATION REQUIRED]": "/hashtag/{tag}",
+        "Location [TODO]": "/location",
+        "Info [AUTHENTICATION REQUIRED]": "/info",
+        "Show Current User [AUTHENTICATION REQUIRED]": "/users/me",
     }
 
     return content
