@@ -1,10 +1,8 @@
-import importlib
 from fastapi import FastAPI, Depends, HTTPException, status
 from typing import Optional
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel, BaseSettings
-import random
-from scrape.main import Hashtag
+from pydantic import BaseModel
+from scrape.main import scrape_graphql, scrape_http
 from .token import token_gen
 
 # Theoretical DB
@@ -122,9 +120,10 @@ def index():
 @app.get("/hashtag/{query}")
 def hashtag(query: str, current_user: User = Depends(get_current_active_user)):
     print(query)
-    data = Hashtag(query)
-    dictionary = data.scrape()
-    return dictionary
+    data = scrape_http(query)
+    print(data)
+    print(data.headers)
+    return "OK"
 
 
 @app.get("/location")
