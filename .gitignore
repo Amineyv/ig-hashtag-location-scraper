@@ -2,5 +2,4 @@ Pipfile
 Pipfile*
 __pycache__/
 .vscode/
-token.key
 
